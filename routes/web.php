@@ -42,6 +42,28 @@ Route::prefix('admin')->group(function(){
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset')->name('admin.password.update');
+});
 
+Route::prefix('blogger')->group(function(){
 
+    //Dashboard Route
+
+    Route::get('/', 'BloggerController@index')->name('blogger.dashboard');
+    //Login Route
+
+    Route::get('/login', 'Auth\BloggerLoginController@showLoginForm')->name('blogger.login');
+    Route::post('/login', 'Auth\BloggerLoginController@login')->name('blogger.login.submit');
+
+    //Logout Route
+    Route::post('/logout', 'Auth\BloggerLoginController@logout')->name('blogger.logout');
+
+    //Register Routes
+    Route::get('/register', 'Auth\BloggerRegisterController@showRegistrationForm')->name('blogger.register');
+    Route::post('/register', 'Auth\BloggerRegisterController@register')->name('blogger.register.submit');
+
+    //Password Reset Route
+    Route::get('/password/reset', 'Auth\BloggerForgotPasswordController@showLinkRequestForm')->name('blogger.password.request');
+    Route::post('/password/email', 'Auth\BloggerForgotPasswordController@sendResetLinkEmail')->name('blogger.password.email');
+    Route::get('/password/reset/{token}', 'Auth\BloggerResetPasswordController@showResetForm')->name('blogger.password.reset');
+    Route::post('/password/reset', 'Auth\BloggerResetPasswordController@reset')->name('blogger.password.update');
 });

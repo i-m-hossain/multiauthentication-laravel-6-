@@ -65,6 +65,19 @@
                                             @csrf
                                         </form>
                                     </div>
+                                @elseif(\Illuminate\Support\Facades\Auth::guard('blogger')->check())
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('blogger.logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('blogger-logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="blogger-logout-form" action="{{ route('blogger.logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+
                                 @else
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('user.logout') }}"

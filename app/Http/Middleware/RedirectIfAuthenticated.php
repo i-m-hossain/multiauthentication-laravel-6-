@@ -24,6 +24,11 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.dashboard');
                 }
                 break;
+            case 'blogger':
+                if (Auth::guard($guard)->check()){
+                    return redirect()->route('blogger.dashboard');
+                }
+                break;
             default:
                 if (Auth::guard($guard)->check()){
                     return redirect()->route('home');
